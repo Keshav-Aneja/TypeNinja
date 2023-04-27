@@ -14,7 +14,9 @@ let resultOverlay = document.querySelector('.overlay');
 let incorrectWords = 0;
 let currentSpeed = 0;
 let highestSpeed = 0;
-
+document.addEventListener('keydown', function (e) {
+  console.log(e);
+});
 let keyCheck = function (key, value) {
   if (key === value) {
     return true;
@@ -33,7 +35,19 @@ let ctrlKeys = function (key) {
     key !== 'ArrowRight' &&
     key !== 'ArrowLeft' &&
     key !== 'ArrowUp' &&
-    key !== 'ArrowDown'
+    key !== 'ArrowDown' &&
+    key !== 'F1' &&
+    key !== 'F2' &&
+    key !== 'F3' &&
+    key !== 'F4' &&
+    key !== 'F5' &&
+    key !== 'F6' &&
+    key !== 'F7' &&
+    key !== 'F8' &&
+    key !== 'F9' &&
+    key !== 'F10' &&
+    key !== 'F11' &&
+    key !== 'F12'
   ) {
     return true;
   }
@@ -91,10 +105,14 @@ let clearAll = function () {
     text[i].style.color = 'rgb(123, 119, 119)';
   }
 };
-document.querySelector('#redo').addEventListener('click', clearAll);
+document.querySelector('#redo').addEventListener('click', function () {
+  clearAll();
+  startTimer = new Date();
+});
 document.addEventListener('keydown', function (e) {
   if (e.key === 'Escape') {
     clearAll();
+    startTimer = new Date();
   }
 });
 document.querySelector('#redo').addEventListener('mouseover', function () {
@@ -144,7 +162,7 @@ function showScore(diff) {
   const timeTaken = Math.trunc(diff / 1000) / 60;
   const totalWords = correctWords + incorrectWords;
   currentSpeed = Math.round((totalWords - incorrectWords) / 5 / timeTaken);
-  console.log('here');
+  // console.log(totalWords, incorrectWords);
   const accuracy = Math.round((correctWords * 100) / totalWords);
   document.querySelector('#currentSpeed').textContent = `${currentSpeed}wpm`;
   document.querySelector('#Accuracy').textContent = `${accuracy}%`;
