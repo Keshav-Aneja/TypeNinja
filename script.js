@@ -63,6 +63,12 @@ document.addEventListener('keyup', function (x) {
     warningMsg.classList.add('hidden');
   }
 });
+// Adding sound effect after every word
+document.addEventListener('keypress', function (e) {
+  if (e.key === ' ') {
+    document.querySelector('#myAudio').play();
+  }
+});
 document.addEventListener('keyup', function (e) {
   if (
     keyCheck(e.key, mainText[pointer]) &&
@@ -176,6 +182,7 @@ function showScore(diff) {
 }
 document.addEventListener('keydown', function (e) {
   if (e.key === '.' || pointer === 171) {
+    // document.querySelector('#myAudio2').play();
     endTimer = new Date();
     const diff = endTimer - startTimer;
     showScore(diff);
