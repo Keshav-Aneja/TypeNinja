@@ -5,14 +5,14 @@
 <h2>Features: </h2>
 <p><b>Version 1.0</b></p>
 <ul>
-<li>Color-coded letters: The letters change color based on whether the user has correctly typed them or not. Green indicates a correct keystroke, while red indicates an incorrect one.</li>
-<li>Backspace functionality: The backspace key allows the user to delete the last typed character.</li>
-<li>Character counter: A character counter at the top of the screen shows the number of characters typed so far.</li>
-<li>Caps Lock indicator: An indicator shows whether the Caps Lock key is on or off.</li>
-<li>Result modal: After completing the test, a modal displays the user's speed, accuracy, number of characters typed, and time taken to complete the test.</li>
-<li>Restart test button: The user can restart the test at any time by clicking the "Restart Test" button, which can also be activated by pressing the Esc key.</li>
-<li>Previous speed and highest speed: TypENinja keeps track of the user's previous speed and highest speed, which are displayed on the result modal.</li>
-<li>Keypress blocking: Controller or modifier keys are blocked from being typed, ensuring accurate test results.</li>
+<li><b>Color-coded letters:</b> The letters change color based on whether the user has correctly typed them or not. Green indicates a correct keystroke, while red indicates an incorrect one.</li>
+<li><b>Backspace functionality:</b> The backspace key allows the user to delete the last typed character.</li>
+<li><b>Character counter:</b> A character counter at the top of the screen shows the number of characters typed so far.</li>
+<li><b>Caps Lock indicator:</b> An indicator shows whether the Caps Lock key is on or off.</li>
+<li><b>Result modal:</b> After completing the test, a modal displays the user's speed, accuracy, number of characters typed, and time taken to complete the test.</li>
+<li><b>Restart test button:</b> The user can restart the test at any time by clicking the "Restart Test" button, which can also be activated by pressing the Esc key.</li>
+<li><b>Previous speed and highest speed:</p> TypENinja keeps track of the user's previous speed and highest speed, which are displayed on the result modal.</li>
+<li><b>Keypress blocking:</b> Controller or modifier keys are blocked from being typed, ensuring accurate test results.</li>
 
 <br>
 <h2>Usage</h2>
@@ -20,3 +20,5 @@
 
 <br>
 <h2>Future Development</h2>
+<p>More text options for typing tests</p>
+<p>A leaderboard to compare scores with other users</p>
