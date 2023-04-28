@@ -20,5 +20,6 @@
 
 <br>
 <h2>Future Development</h2>
+<p>Adding Color Themes : Neo, Retro, Arcade</p>
 <p>More text options for typing tests</p>
 <p>A leaderboard to compare scores with other users</p>
