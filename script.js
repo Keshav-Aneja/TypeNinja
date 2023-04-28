@@ -2,7 +2,7 @@
 let random = Math.trunc(Math.random() * 5);
 
 let mainText =
-  'time if than more thing without which open by before the begin man school under tell should of stand go keep even but we public during small by program too part might work.  ';
+  'time if than more thing without which open by before the begin man school under tell should of stand go keep even but we public during small by program too part might work. ';
 
 let pointer = 0;
 let correctWords = 0;
@@ -175,7 +175,7 @@ function showScore(diff) {
   document.querySelector('#highScore').textContent = highestSpeed;
 }
 document.addEventListener('keydown', function (e) {
-  if (e.key === '.' && pointer === 171) {
+  if (e.key === '.' || pointer === 171) {
     endTimer = new Date();
     const diff = endTimer - startTimer;
     showScore(diff);
