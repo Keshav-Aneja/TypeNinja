@@ -8,13 +8,17 @@
     <link rel="stylesheet" href="stylesheet.css" />
   </head>
   <body>
-    <!-- <audio id="myAudio" src="coin_c_02-102844.mp3"></audio> -->
-    <!-- <audio id="myAudio2" src="game-over-arcade-6435.mp3"></audio> -->
+    <audio id="myAudio" src="coinSound.mp3"></audio> -->
+    <audio id="myAudio2" src="game-over-arcade-6435.mp3"></audio>
+    <audio id="myAudio4" src="level-win-6416.mp3"></audio> -->
+    <audio id="myAudio3" src="message-incoming-132126.mp3"></audio>
 
     <!-- <img src="avatar.jpg" alt="" /> -->
-    <div class="header">
-      <h1 id="headingmain">TypeNinja</h1>
-      <img src="keyboard.png" width="65px" height="55px" />
+    <div class="header"></div>
+    <div class="nav">
+      <span class="nav-links classic">😁</span>
+      <span class="nav-links retro">😎</span>
+      <span class="nav-links arcade">😍</span>
     </div>
     <div class="wrapper">
       <button class="warning hidden">
@@ -108,8 +112,9 @@
           ><span class="letter">h</span><span class="letter">t</span
           ><span class="letter"> </span><span class="letter">w</span
           ><span class="letter">o</span><span class="letter">r</span
-          ><span class="letter">k</span><span class="letter"> </span
-          ><span class="letter"> </span>
+          ><span class="letter">k</span>
+          <!-- <span class="letter"> </span -->
+          <!-- ><span class="letter"> </span> -->
         </section>
         <section class="textField01">
           <span class="letter">i</span><span class="letter"> </span
@@ -276,12 +281,12 @@
         </section>
       </div>
       <section>
-        <img src="auto-renew-hove.gif" alt="" id="redo" />
+        <img src="auto-renew-hove.gif" alt="" id="redo" class="" />
         <!-- <img src="new-field.gif" alt="" id="newText" /> -->
       </section>
       <span class="modal-restart hidden">Restart Typing! [Esc]</span>
     </div>
-    <div class="scoreCard">
+    <div class="scoreCard scorebg">
       <p>Previous Speed : <span id="prevScore">-</span> wpm</p>
       <p>Highest Speed : <span id="highScore">-</span> wpm</p>
     </div>
@@ -291,12 +296,12 @@
       <hr />
       <section class="cont">
         <section class="left">
-          <h2>Speed <span id="currentSpeed"></span></h2>
-          <h2>Accuracy <span id="Accuracy"></span></h2>
-          <h3>Time Taken <span id="timeTaken"></span></h3>
-          <h3>| Character <span id="charCount"></span></h3>
+          <h2 class="scoreHead1">Speed <span id="currentSpeed"></span></h2>
+          <h2 class="scoreHead2">Accuracy <span id="Accuracy"></span></h2>
+          <h3 class="scoreHead3">Time Taken <span id="timeTaken"></span></h3>
+          <h3 class="scoreHead4">| Character <span id="charCount"></span></h3>
         </section>
-        <section class="right"><img src="keyboard.png" alt="" /></section>
+        <section class="right"><img src="keyboard.png" id="keyImg" /></section>
       </section>
     </div>
     <div class="overlay hidden"></div>

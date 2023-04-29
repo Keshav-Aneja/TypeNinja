@@ -5,6 +5,7 @@ let mainText = [
   'i have often walked down this street before but the pavement always stayed beneath my feet before all at once am i several stories high knowing i am on the street where you live',
   'with at see use since most and problem home consider know nation real consider very take must through there word at during there even great',
 ];
+console.log(mainText[0].length, mainText[1].length, mainText[2].length);
 //Hiding all other text
 let random;
 function initator() {
@@ -24,7 +25,7 @@ function initator() {
   }
 }
 initator();
-let textLength = mainText[random].length - 1;
+let textLength = mainText[random].length;
 let pointer = 0;
 let correctWords = 0;
 let incorrectWords = 0;
@@ -37,6 +38,7 @@ let warningMsg = document.querySelector('.warning');
 let resultModal = document.querySelector('.Results');
 let resultOverlay = document.querySelector('.overlay');
 let close = document.querySelector('.close');
+let theme;
 let ctrlKeys = function (key) {
   if (
     key !== 'Enter' &&
@@ -72,10 +74,105 @@ let adjuster;
 if (random === 0) {
   adjuster = 0;
 } else if (random === 1) {
-  adjuster = mainText[0].length + 2;
+  adjuster = mainText[0].length;
 } else if (random === 2) {
-  adjuster = mainText[0].length + mainText[1].length + 2;
+  adjuster = mainText[0].length + mainText[1].length;
 }
+//Color Themes
+let underlineColor = '#dfb414';
+let textColor = 'white';
+let retro = document.querySelector('.retro');
+let classic = document.querySelector('.classic');
+let arcade = document.querySelector('.arcade');
+let navLinks = document.querySelectorAll('.nav-links');
+classic.addEventListener('click', function () {
+  document.querySelector('body').style.backgroundColor = '#333438';
+  document.querySelector('body').style.backgroundImage = 'none';
+  document.querySelector('.wrapper').style.background = 'rgb(45, 46, 50, 0.8)';
+  counter.style.color = '#dfb414';
+  underlineColor = '#dfb414';
+  textColor = 'white';
+  for (let i = 0; i < 3; i++) {
+    navLinks[i].style.backgroundColor = 'rgb(123, 119, 119)';
+  }
+  document.querySelector('.scorebg').style.backgroundColor = '#333438';
+  document.querySelector('.header').style.backgroundImage =
+    'url("HeadingLogo3.png")';
+  theme = 'classic';
+  resultModal.style.backgroundColor = '#202021';
+  resultModal.style.backgroundImage = 'none';
+  resultModal.style.backgroundBlendMode = 'none';
+  resultOverlay.style.backgroundColor = '#1f1e1e';
+  document.querySelector('.scoreHead1').style.color = '#3c3d41';
+  document.querySelector('.scoreHead2').style.color = '#3c3d41';
+  document.querySelector('.scoreHead3').style.color = 'rgb(123, 119, 119)';
+  document.querySelector('.scoreHead4').style.color = 'rgb(123, 119, 119)';
+  document.querySelector('#currentSpeed').style.color = '#dfb414';
+  document.querySelector('#Accuracy').style.color = '#dfb414';
+  document.querySelector('#timeTaken').style.color = '#dfb414';
+  document.querySelector('#charCount').style.color = '#dfb414';
+  document.querySelector('#keyImg').style.filter = 'none';
+  resultOverlay.style.backgroundColor = '#1f1e1e';
+});
+retro.addEventListener('click', function () {
+  document.querySelector('body').style.backgroundImage =
+    'url("BackgroundRetro-1.png")';
+  document.querySelector('.wrapper').style.background = 'rgb(10, 5, 60,0.7)';
+  textColor = 'pink';
+  counter.style.color = '#ff66ff';
+  underlineColor = '#ff66ff';
+  for (let i = 0; i < 3; i++) {
+    navLinks[i].style.backgroundColor = 'rgb(10, 5, 60)';
+  }
+  document.querySelector('.header').style.backgroundImage =
+    'url("TextRetro-1.png")';
+  document.querySelector('.scorebg').style.backgroundColor =
+    'rgb(10, 5, 60,0.8)';
+  theme = 'retro';
+  resultModal.style.backgroundColor = '#85C4F6';
+  resultModal.style.backgroundImage = 'url("BackgroundRetro-1.png")';
+  resultModal.style.backgroundBlendMode = 'darken';
+  resultOverlay.style.backgroundColor = '#41028D';
+  document.querySelector('.scoreHead1').style.color = 'white';
+  document.querySelector('.scoreHead2').style.color = 'white';
+  document.querySelector('.scoreHead3').style.color = 'white';
+  document.querySelector('.scoreHead4').style.color = 'white';
+  document.querySelector('#currentSpeed').style.color = '#53039A';
+  document.querySelector('#Accuracy').style.color = '#53039A';
+  document.querySelector('#timeTaken').style.color = '#53039A';
+  document.querySelector('#charCount').style.color = '#53039A';
+  document.querySelector('#keyImg').style.filter = 'brightness(100)';
+  resultOverlay.style.backgroundColor = '#2492BC';
+});
+arcade.addEventListener('click', function () {
+  document.querySelector('body').style.backgroundImage = 'url("b.jpg")';
+  document.querySelector('.wrapper').style.background = 'rgb(194, 240,250,0.7)';
+  counter.style.color = '#0084A7';
+  underlineColor = '#0080ff';
+  textColor = '#0066ff';
+  for (let i = 0; i < 3; i++) {
+    navLinks[i].style.backgroundColor = '#0084A7';
+  }
+  document.querySelector('.scorebg').style.backgroundColor =
+    'rgb(194, 240,250,0.8)';
+  document.querySelector('.header').style.backgroundImage =
+    'url("ArcadeHeading2.png")';
+  theme = 'arcade';
+  resultModal.style.backgroundColor = '#85C4F6';
+  resultModal.style.backgroundImage = 'url("b.jpg")';
+  resultModal.style.backgroundBlendMode = 'soft-light';
+  document.querySelector('.scoreHead1').style.color = 'white';
+  document.querySelector('.scoreHead2').style.color = 'white';
+  document.querySelector('.scoreHead3').style.color = 'white';
+  document.querySelector('.scoreHead4').style.color = 'white';
+  document.querySelector('#currentSpeed').style.color = '#003E78';
+  document.querySelector('#Accuracy').style.color = '#003E78';
+  document.querySelector('#timeTaken').style.color = '#003E78';
+  document.querySelector('#charCount').style.color = '#003E78';
+  document.querySelector('#keyImg').style.filter = 'brightness(100)';
+  resultOverlay.style.backgroundColor = '#2492BC';
+});
+
 //-->Caps Lock Alert
 document.addEventListener('keydown', function (x) {
   if (x.getModifierState('CapsLock')) {
@@ -88,15 +185,17 @@ document.addEventListener('keyup', function (x) {
   }
 });
 // Adding sound effect after every word
-// document.addEventListener('keypress', function (e) {
-//   if (e.key === ' ') {
-//     document.querySelector('#myAudio').play();
-//   }
-// });
+document.addEventListener('keypress', function (e) {
+  if (e.key === ' ' && theme === 'arcade') {
+    document.querySelector('#myAudio').play();
+  } else if (e.key === ' ' && theme === 'retro') {
+    document.querySelector('#myAudio3').play();
+  }
+});
 //Functions to avoid Repition
 let underlineEffect = function () {
   text[adjuster + pointer].style.textDecoration = 'underline';
-  text[adjuster + pointer].style.textDecorationColor = '#dfb414';
+  text[adjuster + pointer].style.textDecorationColor = underlineColor;
   counter.textContent = `${pointer} / ${textLength}`;
 };
 let clearAll = function () {
@@ -106,7 +205,7 @@ let clearAll = function () {
   correctWords = 0;
   incorrectWords = 0;
 
-  for (let i = 0; i < textLength; i++) {
+  for (let i = 0; i <= textLength; i++) {
     text[adjuster + i].style.color = 'rgb(123, 119, 119)';
   }
 };
@@ -119,8 +218,9 @@ document.addEventListener('keyup', function (e) {
     e.key !== 'Backspace'
   ) {
     text[adjuster + pointer].style.textDecoration = 'none';
-    text[adjuster + pointer].style.color = 'white';
-    if (pointer <= textLength) {
+    text[adjuster + pointer].style.color = textColor;
+    if (pointer < textLength) {
+      //I did remove -1 here
       pointer++;
       correctWords++;
     }
@@ -202,6 +302,11 @@ let closeModal = function () {
   resultOverlay.classList.add('hidden');
 };
 let showModal = function () {
+  if (theme === 'arcade') {
+    document.querySelector('#myAudio2').play();
+  } else if (theme === 'retro') {
+    document.querySelector('#myAudio4').play();
+  }
   resultModal.classList.remove('hidden');
   resultOverlay.classList.remove('hidden');
 };
@@ -241,8 +346,7 @@ function showScore(diff) {
 }
 //The result modal will be shown as soon as you finish the last character
 document.addEventListener('keydown', function (e) {
-  if (pointer === textLength) {
-    // document.querySelector('#myAudio2').play();
+  if (pointer === textLength - 1) {
     endTimer = new Date();
     const diff = endTimer - startTimer;
     showScore(diff);
