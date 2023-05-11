@@ -6,7 +6,7 @@ let mainText = [
   'with at see use since most and problem home consider know nation real consider very take must through there word at during there even great',
 ];
 console.log(mainText[0].length, mainText[1].length, mainText[2].length);
-//Hiding all other text
+//Hiding all other text & generating a random text field
 let random;
 function initator() {
   random = Math.trunc(Math.random() * 3);
@@ -25,18 +25,22 @@ function initator() {
   }
 }
 initator();
+
 let textLength = mainText[random].length;
 let pointer = 0;
 let correctWords = 0;
 let incorrectWords = 0;
 let currentSpeed = 0;
 let highestSpeed = 0;
+
 let counter = document.querySelector('.counter');
 counter.textContent = ` 0 / ${textLength}`;
 let text = document.querySelectorAll('.letter');
 let warningMsg = document.querySelector('.warning');
 let resultModal = document.querySelector('.Results');
 let resultOverlay = document.querySelector('.overlay');
+let info = document.querySelector('#iBtn');
+let infoModal = document.querySelector('.info');
 let close = document.querySelector('.close');
 let theme;
 let ctrlKeys = function (key) {
@@ -63,7 +67,8 @@ let ctrlKeys = function (key) {
     key !== 'F9' &&
     key !== 'F10' &&
     key !== 'F11' &&
-    key !== 'F12'
+    key !== 'F12' &&
+    key !== 'Tab'
   ) {
     return true;
   }
@@ -86,25 +91,26 @@ let classic = document.querySelector('.classic');
 let arcade = document.querySelector('.arcade');
 let navLinks = document.querySelectorAll('.nav-links');
 classic.addEventListener('click', function () {
-  document.querySelector('body').style.backgroundColor = '#333438';
-  document.querySelector('body').style.backgroundImage = 'none';
-  document.querySelector('.wrapper').style.background = 'rgb(45, 46, 50, 0.8)';
+  document.querySelector('body').style.backgroundImage =
+    'url("Classic-Background.jpg")';
+  document.querySelector('.wrapper').style.background = 'rgba(38, 38, 52, 0.8)';
   counter.style.color = '#dfb414';
   underlineColor = '#dfb414';
   textColor = 'white';
   for (let i = 0; i < 3; i++) {
     navLinks[i].style.backgroundColor = 'rgb(123, 119, 119)';
   }
-  document.querySelector('.scorebg').style.backgroundColor = '#333438';
+  document.querySelector('.scorebg').style.backgroundColor =
+    'rgba(38, 38, 52, 0.8)';
   document.querySelector('.header').style.backgroundImage =
-    'url("HeadingLogo3.png")';
+    'url("Classic-Heading.png")';
   theme = 'classic';
-  resultModal.style.backgroundColor = '#202021';
-  resultModal.style.backgroundImage = 'none';
-  resultModal.style.backgroundBlendMode = 'none';
-  resultOverlay.style.backgroundColor = '#1f1e1e';
-  document.querySelector('.scoreHead1').style.color = '#3c3d41';
-  document.querySelector('.scoreHead2').style.color = '#3c3d41';
+  resultModal.style.backgroundColor = '#212a4e';
+  resultModal.style.backgroundImage = 'url("Classic-Background.jpg")';
+  resultModal.style.backgroundBlendMode = 'soft-light';
+  document.querySelector('.warning').style.backgroundColor = '#dfb414';
+  document.querySelector('.scoreHead1').style.color = '#fff';
+  document.querySelector('.scoreHead2').style.color = '#fff';
   document.querySelector('.scoreHead3').style.color = 'rgb(123, 119, 119)';
   document.querySelector('.scoreHead4').style.color = 'rgb(123, 119, 119)';
   document.querySelector('#currentSpeed').style.color = '#dfb414';
@@ -132,7 +138,8 @@ retro.addEventListener('click', function () {
   resultModal.style.backgroundColor = '#85C4F6';
   resultModal.style.backgroundImage = 'url("BackgroundRetro-1.png")';
   resultModal.style.backgroundBlendMode = 'darken';
-  resultOverlay.style.backgroundColor = '#41028D';
+  resultOverlay.style.backgroundColor = '#0B053D';
+  document.querySelector('.warning').style.backgroundColor = '#FF10FF';
   document.querySelector('.scoreHead1').style.color = 'white';
   document.querySelector('.scoreHead2').style.color = 'white';
   document.querySelector('.scoreHead3').style.color = 'white';
@@ -142,7 +149,7 @@ retro.addEventListener('click', function () {
   document.querySelector('#timeTaken').style.color = '#53039A';
   document.querySelector('#charCount').style.color = '#53039A';
   document.querySelector('#keyImg').style.filter = 'brightness(100)';
-  resultOverlay.style.backgroundColor = '#2492BC';
+  resultOverlay.style.backgroundColor = '#0B053D';
 });
 arcade.addEventListener('click', function () {
   document.querySelector('body').style.backgroundImage = 'url("b.jpg")';
@@ -161,6 +168,7 @@ arcade.addEventListener('click', function () {
   resultModal.style.backgroundColor = '#85C4F6';
   resultModal.style.backgroundImage = 'url("b.jpg")';
   resultModal.style.backgroundBlendMode = 'soft-light';
+  document.querySelector('.warning').style.backgroundColor = '#F07751';
   document.querySelector('.scoreHead1').style.color = 'white';
   document.querySelector('.scoreHead2').style.color = 'white';
   document.querySelector('.scoreHead3').style.color = 'white';
@@ -208,19 +216,21 @@ let clearAll = function () {
   for (let i = 0; i <= textLength; i++) {
     text[adjuster + i].style.color = 'rgb(123, 119, 119)';
   }
+  startTimer = new Date();
 };
 //--> Operations to be performed on correct key press
 document.addEventListener('keyup', function (e) {
   if (
     e.key == mainText[random][pointer] &&
-    pointer <= textLength + 1 &&
+    pointer < textLength &&
     ctrlKeys(e.key) &&
     e.key !== 'Backspace'
   ) {
     text[adjuster + pointer].style.textDecoration = 'none';
     text[adjuster + pointer].style.color = textColor;
-    if (pointer < textLength) {
+    if (pointer <= textLength) {
       //I did remove -1 here
+      console.log(pointer);
       pointer++;
       correctWords++;
     }
@@ -251,16 +261,10 @@ document.addEventListener('keyup', function (e) {
 //Restart Test button or Escape key restart
 document.querySelector('#redo').addEventListener('click', function () {
   clearAll();
-  startTimer = new Date();
 });
-// document.querySelector('#newText').addEventListener('click', function () {
-//   clearAll();
-//   startTimer = new Date();
-// });
 document.addEventListener('keydown', function (e) {
   if (e.key === 'Escape') {
     clearAll();
-    startTimer = new Date();
   }
 });
 document.querySelector('#redo').addEventListener('mouseover', function () {
@@ -271,13 +275,6 @@ document.querySelector('#redo').addEventListener('mouseover', function () {
 document.querySelector('#redo').addEventListener('mouseout', function () {
   document.querySelector('.modal-restart').classList.add('hidden');
 });
-// document.querySelector('#newText').addEventListener('mouseover', function () {
-//   document.querySelector('.modal-restart').classList.remove('hidden');
-//   document.querySelector('.modal-restart').textContent = 'New Text Input';
-// });
-// document.querySelector('#newText').addEventListener('mouseout', function () {
-//   document.querySelector('.modal-restart').classList.add('hidden');
-// });
 
 //Calculating Speed
 let startTimer;
@@ -300,6 +297,7 @@ document.addEventListener('keydown', function (event) {
 let closeModal = function () {
   resultModal.classList.add('hidden');
   resultOverlay.classList.add('hidden');
+  infoModal.classList.add('hidden');
 };
 let showModal = function () {
   if (theme === 'arcade') {
@@ -346,10 +344,15 @@ function showScore(diff) {
 }
 //The result modal will be shown as soon as you finish the last character
 document.addEventListener('keydown', function (e) {
-  if (pointer === textLength - 1) {
+  if (pointer + 1 === textLength) {
     endTimer = new Date();
     const diff = endTimer - startTimer;
     showScore(diff);
     showModal();
   }
+});
+
+info.addEventListener('click', function () {
+  infoModal.classList.remove('hidden');
+  resultOverlay.classList.remove('hidden');
 });

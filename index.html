@@ -8,13 +8,8 @@
     <link rel="stylesheet" href="stylesheet.css" />
   </head>
   <body>
-    <audio id="myAudio" src="coinSound.mp3"></audio> -->
-    <audio id="myAudio2" src="game-over-arcade-6435.mp3"></audio>
-    <audio id="myAudio4" src="level-win-6416.mp3"></audio> -->
-    <audio id="myAudio3" src="message-incoming-132126.mp3"></audio>
-
-    <!-- <img src="avatar.jpg" alt="" /> -->
     <div class="header"></div>
+    <img src="information-button.png" alt="i" id="iBtn" />
     <div class="nav">
       <span class="nav-links classic">😁</span>
       <span class="nav-links retro">😎</span>
@@ -74,7 +69,7 @@
           ><span class="letter">u</span><span class="letter">l</span
           ><span class="letter">d</span><span class="letter"> </span
           ><span class="letter">o</span><span class="letter">f</span
-          ><span class="letter"> </span><span class="letter"> s</span
+          ><span class="letter"> </span><span class="letter">s</span
           ><span class="letter">t</span><span class="letter">a</span
           ><span class="letter">n</span><span class="letter">d</span
           ><span class="letter"> </span><span class="letter">g</span
@@ -98,7 +93,7 @@
           ><span class="letter">m</span><span class="letter">a</span
           ><span class="letter">l</span><span class="letter">l</span
           ><span class="letter"> </span><span class="letter">b</span
-          ><span class="letter">y</span><span class="letter"> </span
+          ><span class="letter">y</span> <span class="letter"> </span
           ><span class="letter">p</span><span class="letter">r</span
           ><span class="letter">o</span><span class="letter">g</span
           ><span class="letter">r</span><span class="letter">a</span
@@ -113,8 +108,6 @@
           ><span class="letter"> </span><span class="letter">w</span
           ><span class="letter">o</span><span class="letter">r</span
           ><span class="letter">k</span>
-          <!-- <span class="letter"> </span -->
-          <!-- ><span class="letter"> </span> -->
         </section>
         <section class="textField01">
           <span class="letter">i</span><span class="letter"> </span
@@ -191,7 +184,7 @@
           ><span class="letter">g</span><span class="letter"> </span
           ><span class="letter">i</span><span class="letter"> </span
           ><span class="letter">a</span><span class="letter">m</span
-          ><span class="letter"> </span> <span class="letter">o</span
+          ><span class="letter"> </span><span class="letter">o</span
           ><span class="letter">n</span><span class="letter"> </span
           ><span class="letter">t</span><span class="letter">h</span
           ><span class="letter">e</span><span class="letter"> </span
@@ -280,9 +273,8 @@
           ><span class="letter">t</span>
         </section>
       </div>
-      <section>
-        <img src="auto-renew-hove.gif" alt="" id="redo" class="" />
-        <!-- <img src="new-field.gif" alt="" id="newText" /> -->
+      <section id="redo">
+        <img src="auto-renew-hover.gif" alt="Restart Button" />
       </section>
       <span class="modal-restart hidden">Restart Typing! [Esc]</span>
     </div>
@@ -294,7 +286,7 @@
       <h1>Score Card</h1>
       <p class="close">X</p>
       <hr />
-      <section class="cont">
+      <section class="content">
         <section class="left">
           <h2 class="scoreHead1">Speed <span id="currentSpeed"></span></h2>
           <h2 class="scoreHead2">Accuracy <span id="Accuracy"></span></h2>
@@ -304,8 +296,57 @@
         <section class="right"><img src="keyboard.png" id="keyImg" /></section>
       </section>
     </div>
+    <audio id="myAudio" src="coin-sound.mp3"></audio>
+    <audio id="myAudio2" src="game-over-arcade.mp3"></audio>
+    <audio id="myAudio4" src="level-win.mp3"></audio>
+    <audio id="myAudio3" src="message-incoming.mp3"></audio>
+
+    <div class="footer">
+      <p>
+        <a
+          href="https://www.instagram.com/k.aneja09/"
+          style="text-decoration: none; color: #aeaeae"
+          >Made by Keshav Aneja</a
+        >
+      </p>
+    </div>
+    <div class="info hidden">
+      <section class="infoContent">
+        <ul>
+          <li>
+            Key color changes dynamically to indicate correctness or
+            incorrectness of input.
+          </li>
+          <li>
+            Implemented backspace functionality for convenient character
+            deletion.
+          </li>
+          <li>
+            Caps Lock key press triggers an "is On" indicator for improved user
+            feedback.
+          </li>
+          <li>
+            Highest and current typing speeds are recorded for performance
+            tracking.
+          </li>
+          <li>
+            Multiple themes available, including Classic, Retro, and Arcade,
+            each accompanied by corresponding sound effects. Stay tuned for more
+            themes in the future.
+          </li>
+          <li>
+            Reset button provided to clear text fields and reset the timer.
+          </li>
+          <li>
+            <em
+              >Multiple text fields provided for versatile practice sessions
+              with different texts.</em
+            >
+          </li>
+        </ul>
+      </section>
+    </div>
     <div class="overlay hidden"></div>
     <script src="script.js"></script>
-    <div class="footer"><p>Made by Keshav Aneja</p></div>
   </body>
 </html>
