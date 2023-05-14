@@ -2,47 +2,23 @@
 
 let mainText = [
   'time if than more thing without which open by before the begin man school under tell should of stand go keep even but we public during small by program too part might work',
-  'i have often walked down this street before but the pavement always stayed beneath my feet before all at once am i several stories high knowing i am on the street where you live',
+  'over ask time end mean present we much would interest what under people then no also during with off to own',
   'with at see use since most and problem home consider know nation real consider very take must through there word at during there even great',
 ];
-console.log(mainText[0].length, mainText[1].length, mainText[2].length);
-//Hiding all other text & generating a random text field
-let random;
-function initator() {
-  random = Math.trunc(Math.random() * 3);
-  let text00 = document.querySelector('.textField00');
-  let text01 = document.querySelector('.textField01');
-  let text02 = document.querySelector('.textField02');
-  if (random == 0) {
-    text01.classList.add('hidden');
-    text02.classList.add('hidden');
-  } else if (random == 1) {
-    text00.classList.add('hidden');
-    text02.classList.add('hidden');
-  } else if (random == 2) {
-    text00.classList.add('hidden');
-    text01.classList.add('hidden');
-  }
-}
-initator();
 
-let textLength = mainText[random].length;
-let pointer = 0;
-let correctWords = 0;
-let incorrectWords = 0;
-let currentSpeed = 0;
-let highestSpeed = 0;
+let random = Math.trunc(Math.random() * 3);
+document.querySelector(`.textField0${random}`).classList.toggle('hidden');
+let mainTextSize = [mainText[0].length, mainText[1].length, mainText[2].length];
+const counter = document.querySelector('.counter');
+counter.textContent = `0 / ${mainTextSize[random]}`;
+const link0 = document.querySelector('.link-0');
+const link1 = document.querySelector('.link-1');
+const link2 = document.querySelector('.link-2');
 
-let counter = document.querySelector('.counter');
-counter.textContent = ` 0 / ${textLength}`;
-let text = document.querySelectorAll('.letter');
-let warningMsg = document.querySelector('.warning');
-let resultModal = document.querySelector('.Results');
-let resultOverlay = document.querySelector('.overlay');
-let info = document.querySelector('#iBtn');
-let infoModal = document.querySelector('.info');
-let close = document.querySelector('.close');
-let theme;
+const resultModal = document.querySelector('.Results');
+const overlayModal = document.querySelector('.overlay');
+let correctChar = 0;
+let incorrectChar = 0;
 let ctrlKeys = function (key) {
   if (
     key !== 'Enter' &&
@@ -68,219 +44,175 @@ let ctrlKeys = function (key) {
     key !== 'F10' &&
     key !== 'F11' &&
     key !== 'F12' &&
-    key !== 'Tab'
+    key !== 'Tab' &&
+    key !== '1' &&
+    key !== '2' &&
+    key !== '3' &&
+    key !== '4' &&
+    key != '5' &&
+    key != '6' &&
+    key != '7' &&
+    key != '8' &&
+    key !== '9' &&
+    key !== '0' &&
+    key != '/' &&
+    key != '*' &&
+    key != '-' &&
+    key != '+'
   ) {
     return true;
   }
   return false;
 };
-//Main Key Events
-let adjuster;
-if (random === 0) {
-  adjuster = 0;
-} else if (random === 1) {
-  adjuster = mainText[0].length;
-} else if (random === 2) {
-  adjuster = mainText[0].length + mainText[1].length;
+const letter = document.querySelectorAll('.letter');
+let adjuster = 0;
+for (let i = 0; i < random; i++) {
+  adjuster += mainText[i].length;
 }
-//Color Themes
-let underlineColor = '#dfb414';
-let textColor = 'white';
-let retro = document.querySelector('.retro');
-let classic = document.querySelector('.classic');
-let arcade = document.querySelector('.arcade');
-let navLinks = document.querySelectorAll('.nav-links');
-classic.addEventListener('click', function () {
-  document.querySelector('body').style.backgroundImage =
-    'url("Classic-Background.jpg")';
-  document.querySelector('.wrapper').style.background = 'rgba(38, 38, 52, 0.8)';
-  counter.style.color = '#dfb414';
-  underlineColor = '#dfb414';
-  textColor = 'white';
-  for (let i = 0; i < 3; i++) {
-    navLinks[i].style.backgroundColor = 'rgb(123, 119, 119)';
-  }
-  document.querySelector('.scorebg').style.backgroundColor =
-    'rgba(38, 38, 52, 0.8)';
-  document.querySelector('.header').style.backgroundImage =
-    'url("Classic-Heading.png")';
-  theme = 'classic';
-  resultModal.style.backgroundColor = '#212a4e';
-  resultModal.style.backgroundImage = 'url("Classic-Background.jpg")';
-  resultModal.style.backgroundBlendMode = 'soft-light';
-  document.querySelector('.warning').style.backgroundColor = '#dfb414';
-  document.querySelector('.scoreHead1').style.color = '#fff';
-  document.querySelector('.scoreHead2').style.color = '#fff';
-  document.querySelector('.scoreHead3').style.color = 'rgb(123, 119, 119)';
-  document.querySelector('.scoreHead4').style.color = 'rgb(123, 119, 119)';
-  document.querySelector('#currentSpeed').style.color = '#dfb414';
-  document.querySelector('#Accuracy').style.color = '#dfb414';
-  document.querySelector('#timeTaken').style.color = '#dfb414';
-  document.querySelector('#charCount').style.color = '#dfb414';
-  document.querySelector('#keyImg').style.filter = 'none';
-  resultOverlay.style.backgroundColor = '#1f1e1e';
-});
-retro.addEventListener('click', function () {
-  document.querySelector('body').style.backgroundImage =
-    'url("BackgroundRetro-1.png")';
-  document.querySelector('.wrapper').style.background = 'rgb(10, 5, 60,0.7)';
-  textColor = 'pink';
-  counter.style.color = '#ff66ff';
-  underlineColor = '#ff66ff';
-  for (let i = 0; i < 3; i++) {
-    navLinks[i].style.backgroundColor = 'rgb(10, 5, 60)';
-  }
-  document.querySelector('.header').style.backgroundImage =
-    'url("TextRetro-1.png")';
-  document.querySelector('.scorebg').style.backgroundColor =
-    'rgb(10, 5, 60,0.8)';
-  theme = 'retro';
-  resultModal.style.backgroundColor = '#85C4F6';
-  resultModal.style.backgroundImage = 'url("BackgroundRetro-1.png")';
-  resultModal.style.backgroundBlendMode = 'darken';
-  resultOverlay.style.backgroundColor = '#0B053D';
-  document.querySelector('.warning').style.backgroundColor = '#FF10FF';
-  document.querySelector('.scoreHead1').style.color = 'white';
-  document.querySelector('.scoreHead2').style.color = 'white';
-  document.querySelector('.scoreHead3').style.color = 'white';
-  document.querySelector('.scoreHead4').style.color = 'white';
-  document.querySelector('#currentSpeed').style.color = '#53039A';
-  document.querySelector('#Accuracy').style.color = '#53039A';
-  document.querySelector('#timeTaken').style.color = '#53039A';
-  document.querySelector('#charCount').style.color = '#53039A';
-  document.querySelector('#keyImg').style.filter = 'brightness(100)';
-  resultOverlay.style.backgroundColor = '#0B053D';
-});
-arcade.addEventListener('click', function () {
-  document.querySelector('body').style.backgroundImage = 'url("b.jpg")';
-  document.querySelector('.wrapper').style.background = 'rgb(194, 240,250,0.7)';
-  counter.style.color = '#0084A7';
-  underlineColor = '#0080ff';
-  textColor = '#0066ff';
-  for (let i = 0; i < 3; i++) {
-    navLinks[i].style.backgroundColor = '#0084A7';
-  }
-  document.querySelector('.scorebg').style.backgroundColor =
-    'rgb(194, 240,250,0.8)';
-  document.querySelector('.header').style.backgroundImage =
-    'url("ArcadeHeading2.png")';
-  theme = 'arcade';
-  resultModal.style.backgroundColor = '#85C4F6';
-  resultModal.style.backgroundImage = 'url("b.jpg")';
-  resultModal.style.backgroundBlendMode = 'soft-light';
-  document.querySelector('.warning').style.backgroundColor = '#F07751';
-  document.querySelector('.scoreHead1').style.color = 'white';
-  document.querySelector('.scoreHead2').style.color = 'white';
-  document.querySelector('.scoreHead3').style.color = 'white';
-  document.querySelector('.scoreHead4').style.color = 'white';
-  document.querySelector('#currentSpeed').style.color = '#003E78';
-  document.querySelector('#Accuracy').style.color = '#003E78';
-  document.querySelector('#timeTaken').style.color = '#003E78';
-  document.querySelector('#charCount').style.color = '#003E78';
-  document.querySelector('#keyImg').style.filter = 'brightness(100)';
-  resultOverlay.style.backgroundColor = '#2492BC';
-});
+//Colors & Themes
+const defaultColor = 'rgb(123,119,119)';
+const incorrectColor = '#da487a';
+const correctColor = ['#fff', '#f6a9e1', '#0066ff'];
+const counterColor = ['#dfb414', '#f6a9e1', '#0066ff'];
+const underlineColor = ['#dfb414', '#ff66ff', '#0080ff'];
+const wrapperColor = [
+  'rgb(38,38,52,0.8)',
+  'rgb(10,5,60,0.7)',
+  'rgb(194,240,250,0.7)',
+];
+const overlayColor = ['rgb(38,38,52)', '#0B053D', '#2492BC'];
 
-//-->Caps Lock Alert
-document.addEventListener('keydown', function (x) {
-  if (x.getModifierState('CapsLock')) {
-    warningMsg.classList.remove('hidden');
+let theme = 0;
+let changeStyle = function () {
+  document.querySelector(
+    'body'
+  ).style.backgroundImage = `url("Assets/Background-${theme}.jpg")`;
+  document.getElementById('Heading').src = `Assets/Heading-${theme}.png`;
+  document.querySelector('.overlay').style.backgroundColor =
+    overlayColor[theme];
+  document.querySelector('.wrapper').style.backgroundColor =
+    wrapperColor[theme];
+  counter.style.color = counterColor[theme];
+  resultModal.style.backgroundImage = `url('Assets/Background-${theme}.jpg')`;
+  for (let i = 0; i < pointer; i++) {
+    letter[adjuster + i].style.color = correctColor[theme];
   }
-});
-document.addEventListener('keyup', function (x) {
-  if (!x.getModifierState('CapsLock')) {
-    warningMsg.classList.add('hidden');
-  }
-});
-// Adding sound effect after every word
-document.addEventListener('keypress', function (e) {
-  if (e.key === ' ' && theme === 'arcade') {
-    document.querySelector('#myAudio').play();
-  } else if (e.key === ' ' && theme === 'retro') {
-    document.querySelector('#myAudio3').play();
-  }
-});
-//Functions to avoid Repition
-let underlineEffect = function () {
-  text[adjuster + pointer].style.textDecoration = 'underline';
-  text[adjuster + pointer].style.textDecorationColor = underlineColor;
-  counter.textContent = `${pointer} / ${textLength}`;
 };
-let clearAll = function () {
-  text[adjuster + pointer].style.textDecoration = 'none';
-  pointer = 0;
-  counter.textContent = `${pointer} / ${textLength}`;
-  correctWords = 0;
-  incorrectWords = 0;
-
-  for (let i = 0; i <= textLength; i++) {
-    text[adjuster + i].style.color = 'rgb(123, 119, 119)';
-  }
-  startTimer = new Date();
-};
-//--> Operations to be performed on correct key press
-document.addEventListener('keyup', function (e) {
-  if (
-    e.key == mainText[random][pointer] &&
-    pointer < textLength &&
-    ctrlKeys(e.key) &&
-    e.key !== 'Backspace'
-  ) {
-    text[adjuster + pointer].style.textDecoration = 'none';
-    text[adjuster + pointer].style.color = textColor;
-    if (pointer <= textLength) {
-      //I did remove -1 here
-      console.log(pointer);
-      pointer++;
-      correctWords++;
-    }
-    underlineEffect();
-  }
-  //-->Operation on Incorrect Key press
-  else if (ctrlKeys(e.key) && e.key !== 'Backspace') {
-    text[adjuster + pointer].style.color = '#da487a';
-    text[adjuster + pointer].style.textDecoration = 'none';
-    if (pointer <= textLength) {
-      pointer++;
-      incorrectWords++;
-    }
-    underlineEffect();
-  }
-  //--> Backspace Functionality
-  else if (e.key === 'Backspace' && ctrlKeys(e.key)) {
-    text[adjuster + pointer].style.textDecoration = 'none';
-    if (pointer !== 0) {
-      pointer--;
-    } else {
-      pointer = 0;
-    }
-    underlineEffect();
-    text[adjuster + pointer].style.color = 'rgb(123, 119, 119)';
-  }
+//Changing Theme varaible using Click and Key press
+link0.addEventListener('click', function () {
+  theme = 0;
+  changeStyle();
 });
-//Restart Test button or Escape key restart
-document.querySelector('#redo').addEventListener('click', function () {
-  clearAll();
+link1.addEventListener('click', function () {
+  theme = 1;
+  changeStyle();
+});
+link2.addEventListener('click', function () {
+  theme = 2;
+  changeStyle();
 });
 document.addEventListener('keydown', function (e) {
-  if (e.key === 'Escape') {
-    clearAll();
+  if (e.key === 'Shift') {
+    theme++;
+    theme = theme % 3;
+    changeStyle();
   }
 });
-document.querySelector('#redo').addEventListener('mouseover', function () {
-  document.querySelector('.modal-restart').classList.remove('hidden');
-  document.querySelector('.modal-restart').textContent =
-    'Restart Typing! [Esc]';
+
+let pointer = 0;
+let incPointer = function () {
+  pointer++;
+  counter.textContent = `${pointer} / ${mainTextSize[random]}`;
+};
+let underline = function () {
+  letter[adjuster + pointer].style.textDecoration = 'underline';
+  letter[adjuster + pointer].style.textDecorationColor = underlineColor[theme];
+};
+let removeUnderline = function () {
+  letter[adjuster + pointer].style.textDecoration = 'none';
+};
+//Operations on a Key Press
+document.addEventListener('keydown', function (e) {
+  if (e.key === mainText[random][pointer]) {
+    removeUnderline();
+    letter[adjuster + pointer].style.color = correctColor[theme];
+    incPointer();
+    underline();
+    correctChar++;
+  } else if (e.key !== 'Backspace' && ctrlKeys(e.key)) {
+    removeUnderline();
+    letter[adjuster + pointer].style.color = incorrectColor;
+    incPointer();
+    underline();
+    incorrectChar++;
+  } else if (e.key === 'Backspace' && ctrlKeys(e.key)) {
+    removeUnderline();
+    pointer--;
+    underline();
+    letter[adjuster + pointer].style.color = defaultColor;
+    counter.textContent = `${pointer} / ${mainTextSize[random]}`;
+  }
+  if (e.key === ' ') {
+    document.getElementById(`spaceAudio${theme}`).play();
+  }
 });
-document.querySelector('#redo').addEventListener('mouseout', function () {
+
+//Clear Everything
+let clearAll = function () {
+  for (let i = 0; i <= pointer; i++) {
+    letter[adjuster + i].style.color = defaultColor;
+  }
+  removeUnderline();
+  pointer = 0;
+  correctChar = 0;
+  incorrectChar = 0;
+  TimerOn = false;
+  endTimer = undefined;
+  counter.textContent = `${pointer} / ${mainTextSize[random]}`;
+};
+document.getElementById('redo').addEventListener('click', clearAll);
+document.getElementById('redo').addEventListener('mouseover', function () {
+  document.querySelector('.modal-restart').classList.remove('hidden');
+});
+document.getElementById('redo').addEventListener('mouseout', function () {
   document.querySelector('.modal-restart').classList.add('hidden');
 });
-
-//Calculating Speed
+//Show Modal
+let closeModal = function () {
+  resultModal.classList.add('hidden');
+  overlayModal.classList.add('hidden');
+  clearAll();
+  document.querySelector('.info').classList.add('hidden');
+};
+let showModal = function () {
+  resultModal.classList.remove('hidden');
+  overlayModal.classList.remove('hidden');
+  document.getElementById(`myAudio${theme}`).play();
+};
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') {
+    closeModal();
+  }
+});
+document.querySelector('.close').addEventListener('click', closeModal);
+overlayModal.addEventListener('click', closeModal);
+let showInfo = function () {
+  document.querySelector('.info').classList.remove('hidden');
+  overlayModal.classList.remove('hidden');
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      closeModal();
+    }
+  });
+  overlayModal.addEventListener('click', closeModal);
+};
+document.getElementById('iBtn').addEventListener('click', showInfo);
+//Timer Starting:
 let startTimer;
 let endTimer;
+let currentSpeed = 0;
+let highestSpeed = 0;
 let TimerOn = false;
-
 document.addEventListener('keydown', function (event) {
   if (
     !TimerOn &&
@@ -292,67 +224,29 @@ document.addEventListener('keydown', function (event) {
     TimerOn = true;
   }
 });
-
-//Result Modal
-let closeModal = function () {
-  resultModal.classList.add('hidden');
-  resultOverlay.classList.add('hidden');
-  infoModal.classList.add('hidden');
-};
-let showModal = function () {
-  if (theme === 'arcade') {
-    document.querySelector('#myAudio2').play();
-  } else if (theme === 'retro') {
-    document.querySelector('#myAudio4').play();
-  }
-  resultModal.classList.remove('hidden');
-  resultOverlay.classList.remove('hidden');
-};
-close.addEventListener('click', function () {
-  closeModal();
-  clearAll();
-  random = Math.trunc(Math.random() * 3);
-});
 document.addEventListener('keydown', function (e) {
-  if (e.key === 'Escape') {
-    closeModal();
-    if (pointer !== textLength) {
-      random = Math.trunc(Math.random() * 3);
+  if (pointer === mainTextSize[random]) {
+    if (!endTimer) {
+      endTimer = new Date();
     }
-    clearAll();
+    const diff = endTimer - startTimer;
+    const timeTaken = Math.trunc(diff / 1000);
+    const accuracy = Math.round(
+      (correctChar * 100) / (correctChar + incorrectChar)
+    );
+    currentSpeed = Math.round(
+      (((correctChar / 5) * (accuracy / 100)) / timeTaken) * 60
+    );
+    document.getElementById('currentSpeed').textContent = `${currentSpeed} wpm`;
+    document.getElementById('Accuracy').textContent = `${accuracy} %`;
+    document.getElementById('timeTaken').textContent = `${timeTaken} s`;
+    document.getElementById('charCount').textContent =
+      correctChar + incorrectChar;
+    showModal();
   }
-});
-resultOverlay.addEventListener('click', function () {
-  closeModal();
-  clearAll();
-});
-function showScore(diff) {
-  const timeTaken = Math.trunc(diff / 1000) / 60;
-  const totalWords = correctWords + incorrectWords;
-  currentSpeed = Math.round((totalWords - incorrectWords) / 5 / timeTaken);
-  // console.log(totalWords, incorrectWords);
-  const accuracy = Math.round((correctWords * 100) / totalWords);
-  document.querySelector('#currentSpeed').textContent = `${currentSpeed}wpm`;
-  document.querySelector('#Accuracy').textContent = `${accuracy}%`;
-  document.querySelector('#timeTaken').textContent = `${timeTaken * 60}s`;
-  document.querySelector('#charCount').textContent = `${totalWords}`;
-  document.querySelector('#prevScore').textContent = currentSpeed;
   if (currentSpeed > highestSpeed) {
     highestSpeed = currentSpeed;
   }
-  document.querySelector('#highScore').textContent = highestSpeed;
-}
-//The result modal will be shown as soon as you finish the last character
-document.addEventListener('keydown', function (e) {
-  if (pointer + 1 === textLength) {
-    endTimer = new Date();
-    const diff = endTimer - startTimer;
-    showScore(diff);
-    showModal();
-  }
-});
-
-info.addEventListener('click', function () {
-  infoModal.classList.remove('hidden');
-  resultOverlay.classList.remove('hidden');
+  document.getElementById('prevScore').textContent = currentSpeed;
+  document.getElementById('highScore').textContent = highestSpeed;
 });
