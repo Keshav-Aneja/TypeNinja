@@ -17,6 +17,7 @@ const link2 = document.querySelector('.link-2');
 
 const resultModal = document.querySelector('.Results');
 const overlayModal = document.querySelector('.overlay');
+const warningMsg = document.querySelector('.warning');
 let correctChar = 0;
 let incorrectChar = 0;
 let ctrlKeys = function (key) {
@@ -97,6 +98,7 @@ let changeStyle = function () {
   for (let i = 0; i < pointer; i++) {
     letter[adjuster + i].style.color = correctColor[theme];
   }
+  warningMsg.style.backgroundColor = underlineColor[theme];
 };
 //Changing Theme varaible using Click and Key press
 link0.addEventListener('click', function () {
@@ -119,6 +121,16 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
+document.addEventListener('keydown', function (x) {
+  if (x.getModifierState('CapsLock')) {
+    warningMsg.classList.remove('hidden');
+  }
+});
+document.addEventListener('keyup', function (x) {
+  if (!x.getModifierState('CapsLock')) {
+    warningMsg.classList.add('hidden');
+  }
+});
 let pointer = 0;
 let incPointer = function () {
   pointer++;
